@@ -1,14 +1,13 @@
 #include <gtest/gtest.h>
 #include <fishnet/TestUtil.hpp>
 #include <fishnet/MemgraphClient.hpp>
-#include "WorkflowTestEnvironment.hpp"
 #include "JobAdjacency.hpp"
 
 using namespace testutil;
 class ConcurrentSessionsTest: public ::testing::Test {
 protected:
     static void SetUpTestSuite(){
-        connection = MemgraphConnection::create(WorkflowTestEnvironment::memgraphParams()).value_or_throw();
+        connection = MemgraphConnection::fromEnv().value_or_throw();
         adj = JobAdjacency(MemgraphConnection(connection));
     }
 

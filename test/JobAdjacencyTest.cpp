@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include <fishnet/TestUtil.hpp>
 #include "JobAdjacency.hpp"
-#include "WorkflowTestEnvironment.hpp"
 #include <fishnet/Graph.hpp>
 
 using namespace fishnet::graph;
@@ -12,7 +11,7 @@ using DAGType = decltype(GraphFactory::DAG<Job>(JobAdjacency(MemgraphConnection:
 class JobAdjacencyTest: public ::testing::Test{
 protected:
     static void SetUpTestSuite() {
-        auto connection = MemgraphConnection::create(WorkflowTestEnvironment::memgraphParams()).value_or_throw();
+        auto connection = MemgraphConnection::fromEnv().value_or_throw();
         jobAdj = JobAdjacency(std::move(connection));
     }
 
@@ -34,8 +33,6 @@ protected:
             jobAdj->clear();
         }
     }
-
-    static inline mg::Client::Params params = WorkflowTestEnvironment::memgraphParams();
     static inline std::expected<JobAdjacency,std::string> jobAdj = std::unexpected("Not initialized");
     Job filterJob {1,"filter.json",JobType::FILTER,JobState::RUNNABLE};
     Job secondFilterJob {2,"otherFilter.json",JobType::FILTER,JobState::RUNNABLE};
@@ -45,7 +42,7 @@ protected:
 };
 
 TEST_F(JobAdjacencyTest, initDAG){
-    EXPECT_NO_FATAL_FAILURE(auto g= GraphFactory::DAG<Job>(JobAdjacency(MemgraphConnection::create(params).value())));
+    EXPECT_NO_FATAL_FAILURE(auto g= GraphFactory::DAG<Job>(JobAdjacency(MemgraphConnection::fromEnv().value())));
 }
 
 TEST_F(JobAdjacencyTest, addNode){
