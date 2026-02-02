@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION=1.2.1
+VERSION=1.3.0
 docker build -f Dockerfile.base  -t logru/sda-no-db:${VERSION} -t logru/sda-no-db:latest .
 docker build -f Dockerfile.db -t logru/sda:${VERSION} -t logru/sda:latest .
 docker login
