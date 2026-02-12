@@ -1,6 +1,6 @@
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [FishnetShapefileSplitter]
+baseCommand: [SettlementDelineationSplitter]
 requirements:
   InlineJavascriptRequirement: {}
 inputs:
