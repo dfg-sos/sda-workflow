@@ -56,14 +56,14 @@ def config_template() -> dict:
         "visualize-edges": True
     }
 
-configFileRelativePath = "app/sda-workflow/prod/local/sda-workflow-local.json"
-cwlRelativePath = "cwl/sda"
+configFileRelativePath = "prod/local/sda-workflow-local.json"
+cwlRelativePath = "cwl"
 
 def get_project_directory() -> str:
     current_dir = Path(os.path.abspath(os.path.curdir))
-    while(not str(current_dir.name) in ("/","fishnet")):
+    while(not str(current_dir.name) in ("","sda-workflow") and not any(current_dir.glob("LICENSE"))):
         current_dir = Path(current_dir.parent)
-    if(current_dir.name == "/"):
+    if(current_dir.name == ""):
         raise ValueError("Project directory not found")
     return current_dir
 
