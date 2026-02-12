@@ -60,7 +60,7 @@ configFileRelativePath = "prod/local/sda-workflow-local.json"
 cwlRelativePath = "cwl"
 
 def get_project_directory() -> str:
-    current_dir = Path(os.path.abspath(os.path.curdir))
+    current_dir = Path(os.path.abspath(__file__))
     while(not str(current_dir.name) in ("","sda-workflow") and not any(current_dir.glob("LICENSE"))):
         current_dir = Path(current_dir.parent)
     if(current_dir.name == ""):
