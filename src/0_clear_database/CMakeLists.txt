@@ -1,0 +1,3 @@
+add_executable(SettlementDelineationClearDatabase ClearDatabase.cpp)
+target_link_libraries(SettlementDelineationClearDatabase PRIVATE Fishnet::Fishnet SDA_Workflow::SDA_Workflow CLI11::CLI11)
+install(TARGETS SettlementDelineationClearDatabase RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

@@ -1,0 +1,7 @@
+include(${SDA_SOURCE_DIR}/lib/memgraph.cmake)
+include(${SDA_SOURCE_DIR}/lib/magic_enum.cmake)
+SET(MEMGRAPH_ADAPTER memgraphAdapter)
+add_library(${MEMGRAPH_ADAPTER} INTERFACE)
+add_dependencies(${MEMGRAPH_ADAPTER} mgclient)
+target_include_directories(${MEMGRAPH_ADAPTER} INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
+target_link_libraries(${MEMGRAPH_ADAPTER} INTERFACE ${MGCLIENT_LIBRARY} Fishnet::Graph Fishnet::Workflow magic_enum::magic_enum)

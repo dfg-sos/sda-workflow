@@ -27,8 +27,8 @@ elseif (WIN32)
 endif()
 
 if(NOT EXISTS "${MGCLIENT_LIBRARY_PATH}")
-ExternalProject_Add(mgclient-proj
-  PREFIX           mgclient-proj
+ExternalProject_Add(mgclient-project
+  PREFIX           mgclient-project
   GIT_REPOSITORY   https://github.com/memgraph/mgclient.git
   GIT_TAG          "${MGCLIENT_GIT_TAG}"
   CMAKE_ARGS       "-DCMAKE_INSTALL_PREFIX=${MGCLIENT_INSTALL_DIR}"
