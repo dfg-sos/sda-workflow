@@ -1,6 +1,6 @@
 #include <CLI/CLI.hpp>
 #include <fishnet/Task.hpp>
-#include <fishnet/MemgraphConnection.hpp>
+#include "MemgraphConnection.hpp"
 #include "Scheduler.hpp"
 #include "SchedulerConfig.hpp"
 

@@ -1,11 +1,13 @@
 #include <fishnet/Graph.hpp>
 #include <fishnet/BFSAlgorithm.hpp>
 #include <fishnet/PathHelper.h>
-#include <fishnet/MemgraphClient.hpp>
+#include "JobAdjacency.hpp"
+#include "MemgraphClient.hpp"
 #include <fishnet/Task.hpp>
+#include "JobDAG.hpp"
 #include "ConnectedComponentsConfig.hpp"
 #include "JobWriter.hpp"
-#include "JobDAG.hpp"
+#include "MemgraphConnection.hpp"
 
 class ConnectedComponentsTask: public Task{
 private:
@@ -111,9 +113,9 @@ public:
         for(auto && [file,components]:fileToComponentsMap){
             contractionJobs.emplace_back(std::vector<std::string>({file}),std::move(components));
         }
-        auto exp = MemgraphConnection::create(config.params).transform([](auto && conn){return JobAdjacency(std::move(conn));});
-        auto && jobAdj = getExpectedOrThrowError(exp);
-        auto jobDAG = loadDAG(std::move(jobAdj));
+        auto jobDAG = loadDAG(
+            JobAdjacency(MemgraphConnection::create(config.params).value_or_throw())
+        );
         auto stringsToPathsMapper = [](std::vector<std::string> const & files){
             std::vector<std::filesystem::path> paths;
             paths.reserve(files.size());

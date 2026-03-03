@@ -6,12 +6,12 @@
 #include <fishnet/Contraction.hpp>
 #include <fishnet/CompositePredicate.hpp>
 
-#include <fishnet/CachingMemgraphAdjacency.hpp>
-#include <fishnet/MemgraphAdjacency.hpp>
 #include <fishnet/Task.hpp>
 #include <fishnet/SettlementShape.hpp>
 #include <fishnet/IDReduceFunction.hpp>
 #include "ContractionConfig.hpp"
+#include "CachingMemgraphAdjacency.hpp"
+#include "MemgraphAdjacency.hpp"
 
 
 /**
@@ -109,9 +109,9 @@ public:
         auto outputFileRef = memgraphAdjSrc.getDatabaseConnection().addFileReference(output.getPath());
         if(not outputFileRef)
             throw std::runtime_error( "Could not create file reference for output in Database: "+output.getPath().string());
-        auto sourceGraph = fishnet::graph::GraphFactory::UndirectedGraph<SourceNodeType>(std::move(memgraphAdjSrc));
+        auto sourceGraph = fishnet::graph::GraphFactory::UndirectedGraph(std::move(memgraphAdjSrc));
         this->desc["#Nodes-before-contraction"]=fishnet::util::size(sourceGraph.getNodes());
-        auto resultGraph = fishnet::graph::GraphFactory::UndirectedGraph<ResultNodeType>(std::move(memgraphAdjRes));
+        auto resultGraph = fishnet::graph::GraphFactory::UndirectedGraph(std::move(memgraphAdjRes));
         /*Reduce function used to merge a connected component of nodes (SourceNodeType), solely connected via to-be-contracted edges, into a single node of the ResultNodeType*/
         auto reduceFunction = IDReduceFunction(outputFileRef.value());
         auto contractionPredicate = fishnet::util::AllOfPredicate<SourceNodeType,SourceNodeType>();

@@ -8,10 +8,11 @@
 #include <fishnet/CompositePredicate.hpp>
 #include <fishnet/Rectangle.hpp>
 #include <fishnet/WGS84Ellipsoid.hpp>
-#include <fishnet/MemgraphAdjacency.hpp>
 #include <fishnet/Task.hpp>
 #include <fishnet/SettlementShape.hpp>
 #include "FindNeighboursConfig.hpp"
+#include "MemgraphAdjacency.hpp"
+#include "fishnet/BoundingBoxWrapper.hpp"
 
 /**
  * @brief Implementation of the neighbours task. Finds neighbouring settlements according to the neighbouring predicates specified in the configuration file
@@ -118,7 +119,7 @@ public:
     }
 
     void run() override{
-        auto graph = fishnet::graph::GraphFactory::UndirectedGraph<SettlementShape<P>>(
+        auto graph = fishnet::graph::GraphFactory::UndirectedGraph(
             MemgraphAdjacency<SettlementShape<P>>(MemgraphConnection::create(config.params,workflowID).value_or_throw())
         );   
         std::vector<SettlementShape<P>> polygons = readInput(graph);
@@ -128,13 +129,13 @@ public:
             auto aaBB = fishnet::geometry::Rectangle<fishnet::math::DEFAULT_NUMERIC>(settPolygon);
             double distanceMetersTopLeftBotLeft = distanceFunction({aaBB.left(),aaBB.top()},{aaBB.left(),aaBB.bottom()});
             double scale = (maxEdgeDistanceVar / distanceMetersTopLeftBotLeft) +1;
-            return fishnet::geometry::BoundingBoxPolygon(settPolygon,aaBB.scale(scale));
+            return fishnet::geometry::BoundingBoxWrapper(settPolygon,aaBB.scale(scale));
         };
         fishnet::util::AllOfPredicate<P,P> neighbouringPredicate;
         /* add all neighbouring predicates to composite predicate */
         neighbouringPredicate.add(DistanceBiPredicate(distanceFunction,config.maxEdgeDistance));
         std::ranges::for_each(config.initNeighbouringPredicates<P>(),[&neighbouringPredicate](const auto & predicate){neighbouringPredicate.add(predicate);});
-        auto shortCircuitPredicate = [neighbouringPredicate= std::move(neighbouringPredicate)](const fishnet::geometry::BoundingBoxPolygon<SettlementShape<P>> & lhs, const fishnet::geometry::BoundingBoxPolygon<SettlementShape<P>> & rhs){
+        auto shortCircuitPredicate = [neighbouringPredicate= std::move(neighbouringPredicate)](const fishnet::geometry::BoundingBoxWrapper<SettlementShape<P>> & lhs, const fishnet::geometry::BoundingBoxWrapper<SettlementShape<P>> & rhs){
             return lhs.getBoundingBox().overlap(rhs.getBoundingBox()) && neighbouringPredicate(lhs.getPolygon(),rhs.getPolygon());
         };
         auto result = fishnet::geometry::findNeighbouringPolygonsTemplate(polygons,shortCircuitPredicate,boundingBoxPolygonWrapper,config.maxNeighbours);    

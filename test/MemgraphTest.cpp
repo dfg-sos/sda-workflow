@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 #include <fishnet/TestUtil.hpp>
-#include <fishnet/MemgraphAdjacency.hpp>
-#include <fishnet/CachingMemgraphAdjacency.hpp>
 #include <fishnet/Graph.hpp>
+#include "MemgraphAdjacency.hpp"
+#include "CachingMemgraphAdjacency.hpp"
+#include "MemgraphAdjacency.hpp"
 
 using namespace testutil;
 using namespace fishnet::graph;
@@ -267,8 +268,9 @@ TEST_F(MemgraphTest, clear) {
 }
 
 TEST_F(MemgraphTest, undirectedGraph){
-    std::expected<MemgraphAdjacency<ExampleNode>,std::string> mgAdj = MemgraphConnection::fromEnv().transform([](auto && c){return MemgraphAdjacency<ExampleNode>(std::move(c));});
-    auto g = fishnet::graph::GraphFactory::UndirectedGraph<ExampleNode>(std::move(mgAdj.value()));
+    auto g = fishnet::graph::GraphFactory::UndirectedGraph(
+        MemgraphAdjacency<ExampleNode>(MemgraphConnection::fromEnv().value_or_throw())
+    );
     ExampleNode n1 {1,fileRef};
     ExampleNode n2 {2,fileRef};
     g.addEdge(n1,n2);

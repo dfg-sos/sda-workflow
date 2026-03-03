@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 #include <fishnet/Shapefile.hpp>
 #include <fishnet/PathHelper.h>
-#include <fishnet/MemgraphConnection.hpp>
+#include "MemgraphConnection.hpp"
 #include "Job.hpp"
 
 using json = nlohmann::json;

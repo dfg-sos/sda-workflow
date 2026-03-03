@@ -5,10 +5,9 @@
 #include <fishnet/Graph.hpp>
 #include <future>
 #include <fishnet/Task.hpp>
-#include <fishnet/CachingMemgraphAdjacency.hpp>
-#include "AnalysisConfig.cpp"
-#include "CentralityMeasureJsonReader.hpp"
 #include <fishnet/SettlementShape.hpp>
+#include "CachingMemgraphAdjacency.hpp"
+#include "AnalysisConfig.hpp"
 #include "EdgeVisualizer.hpp"
 
 /**
@@ -94,7 +93,7 @@ public:
             return;
         }
         memgraphAdj.loadNodes(settlements); //load settlement relationships
-        auto graph = fishnet::graph::GraphFactory::UndirectedGraph<NodeType>(std::move(memgraphAdj));
+        auto graph = fishnet::graph::GraphFactory::UndirectedGraph(std::move(memgraphAdj));
         std::future<void> edgesTask;
         if(config.visualizeEdges) { 
             edgesTask = std::async(std::launch::async,[this,&graph,&outputRef]{

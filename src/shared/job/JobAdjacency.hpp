@@ -1,10 +1,10 @@
 #pragma once
-#include <expected>
 #include <sstream>
 #include "Job.hpp"
 #include <fishnet/AdjacencyContainer.hpp>
-#include <fishnet/MemgraphModel.hpp>
+#include "MemgraphModel.hpp"
 #include <magic_enum.hpp>
+
 class JobDAGTest; // only required to access the private default constructor for testing
 
 class JobAdjacency{

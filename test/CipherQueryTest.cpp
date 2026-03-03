@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <fishnet/CipherQuery.hpp>
-#include <fishnet/MemgraphModel.hpp>
+#include "CipherQuery.hpp"
+#include "MemgraphModel.hpp"
 #include <fishnet/TestUtil.hpp>
 
 using namespace testutil;

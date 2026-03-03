@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <fishnet/TestUtil.hpp>
-#include <fishnet/MemgraphClient.hpp>
+#include "MemgraphConnection.hpp"
 #include "JobAdjacency.hpp"
 
 using namespace testutil;

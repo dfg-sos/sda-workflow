@@ -1,5 +1,6 @@
 #pragma once
 #include <filesystem>
+#include <vector>
 
 enum class JobType {
     SPLIT,FILTER,NEIGHBOURS,COMPONENTS,CONTRACTION,ANALYSIS,MERGE,UNDEFINED

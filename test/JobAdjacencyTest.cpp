@@ -6,7 +6,7 @@
 using namespace fishnet::graph;
 using namespace testutil;
 
-using DAGType = decltype(GraphFactory::DAG<Job>(JobAdjacency(MemgraphConnection::create({}).value())));
+using DAGType = decltype(GraphFactory::DAG(JobAdjacency(MemgraphConnection::create({}).value())));
 
 class JobAdjacencyTest: public ::testing::Test{
 protected:
@@ -42,7 +42,7 @@ protected:
 };
 
 TEST_F(JobAdjacencyTest, initDAG){
-    EXPECT_NO_FATAL_FAILURE(auto g= GraphFactory::DAG<Job>(JobAdjacency(MemgraphConnection::fromEnv().value())));
+    EXPECT_NO_FATAL_FAILURE(auto g= GraphFactory::DAG(JobAdjacency(MemgraphConnection::fromEnv().value())));
 }
 
 TEST_F(JobAdjacencyTest, addNode){

@@ -7,6 +7,6 @@ if(${SDA_TEST})
 endif()
 FetchContent_Declare(fishnet
     GIT_REPOSITORY https://gitlab2.informatik.uni-wuerzburg.de/descartes/sos/fishnet
-    GIT_TAG 1.1
+    GIT_TAG 1.2
 )
 FetchContent_MakeAvailable(fishnet)

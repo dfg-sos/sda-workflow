@@ -1,7 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include <fishnet/Graph.hpp>
-#include <fishnet/TaskConfig.hpp>
+#include "MemgraphConfig.hpp"
 #include "CentralityMeasureType.hpp"
 #include "CentralityMeasureJsonReader.hpp"
 #include "magic_enum.hpp"

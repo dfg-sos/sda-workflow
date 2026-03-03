@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <fishnet/GISFactory.hpp>
 #include <fishnet/Task.hpp>
-#include <fishnet/MemgraphClient.hpp>
+#include "MemgraphClient.hpp"
 #include "JobDAG.hpp"
 #include "JobGenerator.hpp"
 #include "SchedulerConfig.hpp"
@@ -33,7 +33,7 @@ public:
         this->desc["config"] = this->config.components.jsonDescription;
         this->desc["working-directory"]=this->workingDirectory.get().string();
         std::vector<std::string> inputStrings;
-        std::ranges::for_each(this->inputFiles,[this,&inputStrings](const auto & file){inputStrings.push_back(file.string());});
+        std::ranges::for_each(this->inputFiles,[&inputStrings](const auto & file){inputStrings.push_back(file.string());});
         this->desc["inputs"]=inputStrings;
         this->desc["output"]=this->outputPath.string();
     }

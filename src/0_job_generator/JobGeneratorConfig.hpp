@@ -1,7 +1,7 @@
 #pragma once
 #include <magic_enum.hpp>
 #include <fishnet/FunctionalConcepts.hpp>
-#include <fishnet/TaskConfig.hpp>
+#include "MemgraphConfig.hpp"
 #include "Job.hpp"
 #include "NeighbouringFilesPredicates.hpp"
 

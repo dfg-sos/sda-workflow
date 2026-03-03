@@ -1,7 +1,7 @@
 #include "JobGenerator.hpp"
 #include <CLI/CLI.hpp>
 #include <fishnet/GISFactory.hpp>
-#include <fishnet/MemgraphConnection.hpp>
+#include "MemgraphConnection.hpp"
 #include <fishnet/Task.hpp>
 
 int main(int argc, char * argv[]){

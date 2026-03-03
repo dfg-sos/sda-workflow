@@ -1,7 +1,6 @@
-#include <fishnet/MemgraphConnection.hpp>
-#include <fishnet/CipherQuery.hpp>
-#include <fishnet/TaskConfig.hpp>
-
+#include "MemgraphConnection.hpp"
+#include "MemgraphConfig.hpp"
+#include "CipherQuery.hpp"
 #include <CLI/CLI.hpp>
 
 int main(int argc, char const *argv[])
