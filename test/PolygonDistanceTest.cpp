@@ -16,6 +16,9 @@ enum class ExecutionMode{
     BRUTE_FORCE, SWEEP_LINE_X, SWEEP_LINE_Y, DEFAULT
 };
 
+static constexpr std::string_view sourceFile = __FILE__;
+static const inline std::filesystem::path projectRoot = std::filesystem::path(sourceFile).parent_path().parent_path();
+
 static inline std::ofstream benchmarkFile = std::ofstream(util::PathHelper::projectDirectory("sda-workflow") / std::filesystem::path("doc/benchmarks/tests/polygon-distance-benchmark.csv"));
 
 template<ExecutionMode ExecMode>
@@ -58,7 +61,7 @@ static void runScenarios(fishnet::geometry::IPolygon auto const & lhs, fishnet::
 
 
 TEST(PolygonDistanceTest, settlementSamples){
-    const std::filesystem::path settlementSamplesPath = util::PathHelper::projectDirectory("sda-workflow") / std::filesystem::path("data/testing/Settlement_Samples");
+    const std::filesystem::path settlementSamplesPath = projectRoot / std::filesystem::path("data/testing/Settlement_Samples");
     const size_t repetitions = 1;
     const size_t samples = 1; // 100
     auto files = fishnet::GISFactory::getGISFiles(settlementSamplesPath);
