@@ -130,7 +130,6 @@ def get_debug_workflow() -> SettlementDelineationAnalysis:
     )
 
 if __name__ == "__main__":
-    debug = False
-    workflow = get_debug_workflow() if debug else parse_args_to_workflow_object()
-    with workflow as workflow:
-        workflow.run()
+    workflow = parse_args_to_workflow_object()
+    with workflow as wf:
+        wf.run()
