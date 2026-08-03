@@ -6,7 +6,7 @@ if(${SDA_TEST})
     set(FISHNET_TEST_LIB ON)
 endif()
 FetchContent_Declare(fishnet
-    GIT_REPOSITORY https://gitlab2.informatik.uni-wuerzburg.de/descartes/sos/fishnet
+    GIT_REPOSITORY https://github.com/LoloGruber/fishnet.git
     GIT_TAG 1.2
 )
 FetchContent_MakeAvailable(fishnet)
