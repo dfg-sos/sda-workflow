@@ -1,5 +1,5 @@
 USER_ID=di35pof
-DOCKER_IMAGE=logru/sda:latest
+DOCKER_IMAGE=ghcr.io/dfg-sos/sda:latest
 INSTALL_REL_DIR=sda-workflow-container
 # load the charliecloud module
 module use /dss/dsstbyfs01/pn56su/pn56su-dss-0020/usr/share/modules/files/

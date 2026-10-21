@@ -32,7 +32,7 @@ start_db(){
     rm -rf ~/sda-workflow/logs/memgraph/data 2>/dev/null || true
     module use /dss/dsstbyfs01/pn56su/pn56su-dss-0020/usr/share/modules/files/
     module load charliecloud
-    ch-run --write -b ~/sda-workflow/logs/memgraph:/var/log/memgraph logru%sda+latest --  /usr/lib/memgraph/memgraph --query-execution-timeout-sec=0 --storage-mode=IN_MEMORY_ANALYTICAL --data-recovery-on-startup=false &
+    ch-run --write -b ~/sda-workflow/logs/memgraph:/var/log/memgraph ghcr.io%dfg-sos%sda+latest --  /usr/lib/memgraph/memgraph --query-execution-timeout-sec=0 --storage-mode=IN_MEMORY_ANALYTICAL --data-recovery-on-startup=false &
     sleep 5
     DB_PID=$!
     echo "Memgraph started with PID $DB_PID"
@@ -70,6 +70,6 @@ ch-run --write \
     -b "$cfg_parent_path:/data/config/" \
     -b "$output_parent_path:/data/output/" \
     -b "./logs/:/data/logs/" \
-    logru%sda+latest -- \
+    ghcr.io%dfg-sos%sda+latest -- \
     SettlementDelineation -i /data/input/$input_filename -o /data/output/$output_filename -c /data/config/$cfg_filename
 stop_db

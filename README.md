@@ -1,9 +1,9 @@
 # Settlement Delineation and Analysis (SDA)
-Delineate urban clusters using a settlement graph and [edge contraction](https://en.wikipedia.org/wiki/Edge_contraction) and then analyze the centrality of the aggregated settlement clusters. It is based on the [Fishnet](https://gitlab2.informatik.uni-wuerzburg.de/descartes/sos/fishnet) framework.
+Delineate urban clusters using a settlement graph and [edge contraction](https://en.wikipedia.org/wiki/Edge_contraction) and then analyze the centrality of the aggregated settlement clusters. It is based on the [Fishnet](https://github.com/DescartesResearch/fishnet) framework.
 
 ![](doc/images/SDA_Workflow.png).
 ### Deployment
-To run the **Settlement Delineation and Analysis** workflow, the easiest way is to use [SettlementDelineationAnalysis.py](SettlementDelineationAnalysis.py), which wraps the command line interface of the [main binary](src/0_workflow/SettlementDelineation.cpp) and executes it in a container using [docker](prod/docker/Dockerfile.db) (which has to be installed in the deployment environment). 
+To run the **Settlement Delineation and Analysis** workflow, the easiest way is to use [SettlementDelineationAnalysis.py](SettlementDelineationAnalysis.py), which wraps the command line interface of the [main binary](src/0_workflow/SettlementDelineation.cpp) and executes it in a container using [docker](Dockerfile) (which has to be installed in the deployment environment). 
 ```
 python3 SettlementDelineationAnalysis.py -i <input> -c <config>.json -o <output>.shp
 ``` 

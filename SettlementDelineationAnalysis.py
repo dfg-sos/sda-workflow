@@ -5,7 +5,7 @@ import argparse
 import time
 import json
 
-SDA_IMAGE = "logru/sda:1.3.2"
+SDA_IMAGE = "ghcr.io/dfg-sos/sda:1.3.2"
 CONTAINER_NAME = "SDAWorkflowContainer"
 
 class SettlementDelineationAnalysis:
